@@ -1,0 +1,76 @@
+/*DROP TABLE contrato_c;
+DROP TABLE clientes;
+DROP TABLE contrato_f;
+DROP TABLE funsionarios;*/
+
+CREATE TABLE clientes(
+	id_cliente INT PRIMARY KEY NOT NULL,
+	nome VARCHAR(500) NOT NULL,
+	data_nace DATE NOT NULL
+
+);
+
+CREATE TABLE contrato_c(
+	id_contato_c INT PRIMARY KEY NOT NULL,
+	tipo_contato VARCHAR (20) NOT NULL,
+	contato VARCHAR (500) NOT NULL,
+	id_cliente INT NOT NULL,
+	FOREIGN KEY (id_cliente) REFERENCES clientes(id_cliente)
+);
+
+CREATE TABLE funsionarios(
+	id_funsionario INT PRIMARY KEY NOT NULL,
+	nome VARCHAR (500) NOT NULL,
+	funcao_cago VARCHAR (100) NOT NULL
+);
+
+CREATE TABLE contrato_f(
+	id_contato_f INT PRIMARY KEY NOT NULL,
+	tipo_contato VARCHAR (20) NOT NULL,
+	contato VARCHAR(500) NOT NULL,
+	id_funsionario INT  NOT NULL,
+	FOREIGN KEY (id_funsionario) REFERENCES funsionarios(id_funsionario)
+);
+
+CREATE TABLE mouses(
+	id_mouse INT PRIMARY KEY NOT NULL,
+	marca VARCHAR (50) NOT NULL,
+	modelo VARCHAR (100) NOT NULL,
+	hz INT NOT NULL	
+);
+
+CREATE TABLE teclados(
+	id_teclado INT PRIMARY KEY NOT NULL,
+	marca VARCHAR(100) NOT NULL,
+	modelo VARCHAR(50) NOT NULL,
+	tipo_taclado VARCHAR (10) NOT NULL
+);
+
+CREATE TABLE monitores(
+	id_monitor INT PRIMARY KEY NOT NULL,
+	marca VARCHAR (50) NOT NULL,
+	modelo VARCHAR (100) NOT NULL,
+	tamanho_tela INT NOT NULL,
+	hz INT NOT NULL
+);
+
+CREATE TABLE gabinetes(
+	id_gabinete INT PRIMARY KEY NOT NULL,
+	processado VARCHAR (100) NOT NULL,
+	placa_mae VARCHAR (100),
+	memoria_ram INT NOT NULL
+);
+
+CREATE TABLE computadores(
+	id_computado INT PRIMARY KEY NOT NULL,
+	stato VARCHAR NOT NULL,
+	id_mouse INT NOT NULL,
+	id_teclado INT NOT NULL,
+	id_monitor INT NOT NULL,
+	id_gabinete INT  NOT NULL,
+
+	FOREIGN KEY (id_mouse) REFERENCES mouses(id_mouse),
+	FOREIGN KEY (id_teclado) REFERENCES teclados(id_teclado),
+	FOREIGN KEY (id_monitor) REFERENCES monitores(id_monitor),
+	FOREIGN KEY (id_gabinete) REFERENCES gabinetes(id_gabinete)
+);
